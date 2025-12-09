@@ -96,7 +96,7 @@ data_db = pd.DataFrame({
 })
 
 # Title
-st.markdown("<h1 style='text-align: center; color: white;'Penguins</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'Penguins'</h1>", unsafe_allow_html=True)
 
 st.markdown(
     """
