@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import altair as alt
+import seaborn as sns
 
 # Set the page title
 st.set_page_config(page_title="Penguins", layout="wide")
