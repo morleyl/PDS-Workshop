@@ -262,12 +262,7 @@ final_chart = (points & bars).configure_axis(
     grid=True,
     gridColor='lightgray',
     gridDash=[3, 3]
-).configure_view(
-    fill='white',       # background of padding
-    strokeWidth=0,      # no border
-    padding={"top": 20, "left": 20, "right": 20, "bottom": 20}
 )
-
 
 st.altair_chart(final_chart, use_container_width=True)
 
