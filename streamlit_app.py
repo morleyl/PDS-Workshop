@@ -97,7 +97,7 @@ points = alt.Chart(penguins, width=550).mark_point().encode( #making scatterplot
     color=alt.condition(brush, "species:N", alt.value("lightgray"))
 ).add_params(brush)
 
-bars = alt.Chart(source4, width=550).mark_bar().encode( #making histogram wider
+bars = alt.Chart(penguins, width=550).mark_bar().encode( #making histogram wider
     y='species:N',
     color=alt.Color('species:N', scale=alt.Scale(scheme='plasma')),  #change of color scheme (now higher contrast)
     x='count(species):Q'
