@@ -2,9 +2,16 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import altair as alt
 
 # Set the page title
-st.set_page_config(page_title="Cool Dashboard", layout="wide")
+st.set_page_config(page_title="Penguins", layout="wide")
+
+import os
+script_dir = os.path.dirname(os.path.abspath(__file__))
+logo_path = os.path.join(script_dir, "logo.jpeg")
+st.sidebar.image(logo_path, caption="Company Logo")
+#st.sidebar.image("logo.jpeg", caption="Company Logo")
 
 # Remove whitespace from the top of the page and sidebar
 
@@ -78,7 +85,36 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# add Penguins data
+import seaborn as sns
+penguins = sns.load_dataset("penguins")
 
+brush = alt.selection_interval()
+
+points = alt.Chart(penguins, width=550).mark_point().encode( #making scatterplot wider
+    x='flipper_length_mm:Q',
+    y='bill_length_mm:Q',
+    color=alt.condition(brush, "species:N", alt.value("lightgray"))
+).add_params(brush)
+
+bars = alt.Chart(source4, width=550).mark_bar().encode( #making histogram wider
+    y='species:N',
+    color=alt.Color('species:N', scale=alt.Scale(scheme='plasma')),  #change of color scheme (now higher contrast)
+    x='count(species):Q'
+).transform_filter(brush)
+
+# Combine both charts
+combined_chart = points & bars #layout of plots: points & bars: The points chart will appear above the bars chart.
+#points | bars: The points chart will appear beside the bars chart (side by side).
+
+
+final_chart = combined_chart.configure_axis(
+    grid=True,  # enable gridlines
+    gridColor='lightgray',  # set gridline color
+    gridDash=[3, 3]  # Dashed gridlines (length of dashes and spaces)
+)
+
+final_chart
 
 # Create a sample dataset
 np.random.seed(42)
@@ -94,7 +130,7 @@ st.markdown("<h1 style='text-align: center; color: white;'>Cool(er) Data Dashboa
 st.markdown(
     """
     <p style='text-align: center; color: white; font-size: 24px;'>
-    by Name Surname
+    by Louise Morley
     </p>
     """,
     unsafe_allow_html=True
