@@ -86,35 +86,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# add Penguins data
-penguins = sns.load_dataset("penguins")
-
-brush = alt.selection_interval()
-
-points = alt.Chart(penguins, width=550).mark_point().encode( #making scatterplot wider
-    x='flipper_length_mm:Q',
-    y='bill_length_mm:Q',
-    color=alt.condition(brush, "species:N", alt.value("lightgray"))
-).add_params(brush)
-
-bars = alt.Chart(penguins, width=550).mark_bar().encode( #making histogram wider
-    y='species:N',
-    color=alt.Color('species:N', scale=alt.Scale(scheme='plasma')),  #change of color scheme (now higher contrast)
-    x='count(species):Q'
-).transform_filter(brush)
-
-# Combine both charts
-combined_chart = points & bars #layout of plots: points & bars: The points chart will appear above the bars chart.
-#points | bars: The points chart will appear beside the bars chart (side by side).
-
-
-final_chart = combined_chart.configure_axis(
-    grid=True,  # enable gridlines
-    gridColor='lightgray',  # set gridline color
-    gridDash=[3, 3]  # Dashed gridlines (length of dashes and spaces)
-)
-
-final_chart
 
 # Create a sample dataset
 np.random.seed(42)
@@ -125,7 +96,7 @@ data_db = pd.DataFrame({
 })
 
 # Title
-st.markdown("<h1 style='text-align: center; color: white;'>Cool(er) Data Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'Penguins</h1>", unsafe_allow_html=True)
 
 st.markdown(
     """
@@ -138,8 +109,7 @@ st.markdown(
 st.markdown(
     """
     <p style='text-align: center; color: white; font-size: 20px;'>
-    Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text
-    Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text
+    This is a dashboard about penguins!
     </p>
     """,
     unsafe_allow_html=True
@@ -259,3 +229,32 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# add Penguins data
+penguins = sns.load_dataset("penguins")
+
+brush = alt.selection_interval()
+
+points = alt.Chart(penguins, width=550).mark_point().encode( #making scatterplot wider
+    x='flipper_length_mm:Q',
+    y='bill_length_mm:Q',
+    color=alt.condition(brush, "species:N", alt.value("lightgray"))
+).add_params(brush)
+
+bars = alt.Chart(penguins, width=550).mark_bar().encode( #making histogram wider
+    y='species:N',
+    color=alt.Color('species:N', scale=alt.Scale(scheme='plasma')),  #change of color scheme (now higher contrast)
+    x='count(species):Q'
+).transform_filter(brush)
+
+# Combine both charts
+combined_chart = points & bars #layout of plots: points & bars: The points chart will appear above the bars chart.
+#points | bars: The points chart will appear beside the bars chart (side by side).
+
+
+final_chart = combined_chart.configure_axis(
+    grid=True,  # enable gridlines
+    gridColor='lightgray',  # set gridline color
+    gridDash=[3, 3]  # Dashed gridlines (length of dashes and spaces)
+)
+
+final_chart
