@@ -246,9 +246,9 @@ penguins = sns.load_dataset("penguins")
 
 brush = alt.selection_interval()
 
-points = alt.Chart(penguins, width=550).mark_point().encode(
-    x='flipper_length_mm:Q',
-    y='bill_length_mm:Q',
+points = alt.Chart(penguins, width=550).mark_point().encode(points = alt.Chart(penguins, width=550).mark_point().encode(
+    x=alt.X('flipper_length_mm:Q', scale=alt.Scale(domain=[170, 240])),
+    y=alt.Y('bill_length_mm:Q', scale=alt.Scale(domain=[30, 65])),
     color=alt.condition(brush, "species:N", alt.value("lightgray"))
 ).add_params(brush)
 
