@@ -54,7 +54,44 @@ header_html = f"""
 </div>
 """
 
-st.markdown(header_html, unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+        /* Main app background */
+        .stApp {
+            background-color: white !important;
+            color: #013220 !important;  /* Dark green text */
+        }
+
+        /* Multi-select and date input labels */
+        div.stMultiSelect label, div.stDateInput label {
+            color: #013220 !important;
+        }
+
+        /* Tags / selected options */
+        div[data-baseweb="tag"] {
+            background-color: #013220 !important;
+            color: white !important;
+        }
+
+        /* Plotly axis titles and text */
+        .plotly-text {
+            color: #013220 !important;
+        }
+
+        /* Footer text */
+        .footer {
+            color: #013220 !important;
+        }
+
+        /* Optional: white chart container if using chart-box style */
+        .chart-box {
+            background-color: white;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # ---------------------------------------------------
