@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import altair as alt
+import seaborn as sns
 
 # Set the page title
 st.set_page_config(page_title="Penguins", layout="wide")
@@ -86,7 +87,6 @@ st.markdown(
 )
 
 # add Penguins data
-import seaborn as sns
 penguins = sns.load_dataset("penguins")
 
 brush = alt.selection_interval()
